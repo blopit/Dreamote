@@ -28,6 +28,7 @@ public class videoCamera extends JPanel {
 	serialCommunicate test = new serialCommunicate();
 	boolean inited = false;
 	int fire = 0;
+	boolean debug = false;
 	
 	public videoCamera(VideoCapture cam) {
 
@@ -328,8 +329,10 @@ public class videoCamera extends JPanel {
 				for (int i = 0; i < approx.total(); i++) {
 					temp_double = approx.get(i, 0);
 					n = new Point(temp_double[0], temp_double[1]);
-
-					g2.drawLine((int) p.x, (int) p.y, (int) n.x, (int) n.y);
+					
+					if (debug) {
+						g2.drawLine((int) p.x, (int) p.y, (int) n.x, (int) n.y);
+					}
 					p = n;
 				}
 			}
@@ -438,7 +441,9 @@ public class videoCamera extends JPanel {
 				tx += c.x;
 				ty += c.y;
 				g.setColor(Color.RED);
-				g.drawLine((int) p.x, (int) p.y, (int) c.x, (int) c.y);
+				if (debug) {
+					g.drawLine((int) p.x, (int) p.y, (int) c.x, (int) c.y);
+				}
 			}
 		}
 		tx /= pnts.size();
