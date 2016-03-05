@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="core.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Documents/Processing/libraries/opencv_processing/library/opencv_processing.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Documents/Processing/libraries/opencv_processing/library/opencv-245.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/shrenilpatel/Documents/Processing/libraries/opencv_processing/library/macosx64"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1 2/lib/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1 2/lib/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1 2/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1 2/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/commons-codec-1.10/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/json-20151123.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/jsoup-1.8.3.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1/lib/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/httpcomponents-client-4.5.1/lib/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/shrenilpatel/Downloads/rxtx-2.1-7-bins-r2/RXTXcomm.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Library/Java/Extensions/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

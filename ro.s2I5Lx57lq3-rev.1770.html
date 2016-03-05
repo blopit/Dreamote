@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head id="head">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<script src="//sketchpad.cc/static/js/shCore.js?1"></script>
+<script src="//sketchpad.cc/static/js/shBrushProcessing.js?1"></script>
+<link href='//fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+<link href="//sketchpad.cc/static/css/shCoreDefault.css?1" rel="stylesheet" type="text/css" />
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<title>sketchpad</title>
+</head>
+<body id="body" style="background-color:#FFFFFF;"><div id="display_error"></div><div id="canvas-wrapper"><script type="text/processing" data-processing-target="targetcanvas">// Pressing Control-R will render this sketch.
+
+int i = 0; 
+
+void setup() {  // this is run once.   
+    
+    // set the background color
+    background(255);
+    
+    // canvas size (Integers only, please.)
+    size(600, 600); 
+      
+    // smooth edges
+    smooth();
+    // limit the number of frames per second
+    frameRate(60);
+    
+    // set the width of the line. 
+    strokeWeight(1);
+} 
+
+int value = 0;
+color c1 = #FFCC00;
+color c2 = #FF00FF;
+int rot = 0;
+int[] pop = {0,0,0,0,0};
+float mrsp = 1.5;
+float rsp = mrsp;
+float frsp = 0.1;
+float arsp = 0.05;
+float fpop = 2.0;
+boolean nearCenter = false;
+float start = 0;
+float end = 0;
+int pwing = -1;
+int wing = -1;
+int curve = PI/2.5;
+
+void draw() {
+    background(0);
+    if (pwing == -1){
+    rot+=rsp;
+    rot = (rot+360)%360;
+    }
+    else{
+        float end = -90 - pwing*(360/5)
+        rot = rot + sin(radians(end-rot))*10.0;
+        }
+
+int p = 256;
+nearCenter = false;
+
+resetMatrix();
+wing = -1;
+for (int i = 0; i < 5; i = i+1) {
+    start = -curve/2 + ((rot*PI/180) + (i*curve) + 4*PI)%(2*PI);
+    end = curve/2 + ((rot*PI/180) + (i*curve) + 4*PI)%(2*PI);
+    
+    fill(c2);
+    if ((sq(mouseX - width/2) + sq(mouseY - height/2)) <= sq(p/2+pop[i]) &&
+    pwing == -1){
+        float a = (atan2(mouseY - height/2, mouseX - width/2) + 4*PI)%(2*PI);  
+        if (a>start && a<end){
+            fill(c1);
+            nearCenter = true;
+            wing = i;
+        }
+    } 
+    
+    if (pwing == i){
+        fill(c1);
+        
+        
+        
+        }
+    
+    translate(width/2, height/2); 
+    
+    rotate(rot*PI/180);
+    rotate(i*curve);
+    
+    translate(pop[i], 0);
+    
+    arc(0, 0, p+pop[i], p+pop[i], -curve/2, curve/2);
+  resetMatrix();
+
+}
+
+if (value == 0){
+for (int i = 0; i < 5; i = i+1) {
+    int fp = ((20-pop[i])/20)*fpop; 
+    int ifp = ((pop[i])/20)*fpop; 
+    
+    if (wing != i){
+        if (pop[i]-ifp < 0){
+        pop[i] = 0;
+        }else{
+            pop[i] -= ifp;
+        }
+    }else{
+        if (pop[i]+fp > 20){
+        pop[i] = 20;
+        }else{
+            pop[i] += fp;
+        }
+    }
+}
+
+if (nearCenter){
+    if (rsp-frsp < 0){
+        rsp = 0;
+    }else{
+        rsp -= frsp;
+    }
+}else{
+    if (rsp+arsp > mrsp){
+        rsp = mrsp;
+    }else{
+        rsp += arsp;
+    }
+}
+
+
+    }else{
+        
+        //float g = ((rot*PI/180) + (pwing*curve))%(2*PI) ;
+        //rot = rots((rot*PI/180), PI/2, 0.005);
+        
+        for (int i = 0; i < 5; i = i+1) {
+    int fp = ((50-pop[i])/50)*fpop; 
+    int ifp = ((3000-pop[i])/3000)*20; 
+    
+    if (pwing != i){
+        if (pop[i]+ ifp > 3000){
+        pop[i] = 3000;
+        }else{
+            pop[i] += ifp;
+        }
+    }else{
+        if (pop[i]+fp > 50){
+        pop[i] = 50;
+        }else{
+            pop[i] += fp;
+        }
+    }
+}
+
+        
+        
+        }
+    
+    
+}
+
+void mouseClicked() {
+    if (wing == pwing && pwing!=-1){
+        pwing = -1;
+        }
+        
+    if (wing != -1){
+        value = 255;
+        c1 = #FFFFFF;
+        pwing = wing;
+    }
+    
+    
+}
+
+</script><canvas id="targetcanvas"></canvas><BR></div><div id="divider"><A HREF="/sp/pad/iframe/ro.s2I5Lx57lq3/rev.1770">&gt; show canvas only &lt;</A></div><pre id='source' name='code' class='brush: processing;'>
+
+
+/* built with Studio Sketchpad: 
+ *   http://sketchpad.cc
+ * 
+ * observe the evolution of this sketch: 
+ *   http://sketchpad.cc/sp/pad/view/ro.s2I5Lx57lq3/rev.1770
+ * 
+ * authors: 
+ *   
+
+ * license (unless otherwise specified): 
+ *   creative commons attribution-share alike 3.0 license.
+ *   http://creativecommons.org/licenses/by-sa/3.0/ 
+ */ 
+
+
+
+// Pressing Control-R will render this sketch.
+
+int i = 0; 
+
+void setup() {  // this is run once.   
+    
+    // set the background color
+    background(255);
+    
+    // canvas size (Integers only, please.)
+    size(600, 600); 
+      
+    // smooth edges
+    smooth();
+    // limit the number of frames per second
+    frameRate(60);
+    
+    // set the width of the line. 
+    strokeWeight(1);
+} 
+
+int value = 0;
+color c1 = #FFCC00;
+color c2 = #FF00FF;
+int rot = 0;
+int[] pop = {0,0,0,0,0};
+float mrsp = 1.5;
+float rsp = mrsp;
+float frsp = 0.1;
+float arsp = 0.05;
+float fpop = 2.0;
+boolean nearCenter = false;
+float start = 0;
+float end = 0;
+int pwing = -1;
+int wing = -1;
+int curve = PI/2.5;
+
+void draw() {
+    background(0);
+    if (pwing == -1){
+    rot+=rsp;
+    rot = (rot+360)%360;
+    }
+    else{
+        float end = -90 - pwing*(360/5)
+        rot = rot + sin(radians(end-rot))*10.0;
+        }
+
+int p = 256;
+nearCenter = false;
+
+resetMatrix();
+wing = -1;
+for (int i = 0; i &lt; 5; i = i+1) {
+    start = -curve/2 + ((rot*PI/180) + (i*curve) + 4*PI)%(2*PI);
+    end = curve/2 + ((rot*PI/180) + (i*curve) + 4*PI)%(2*PI);
+    
+    fill(c2);
+    if ((sq(mouseX - width/2) + sq(mouseY - height/2)) &lt;= sq(p/2+pop[i]) &amp;&amp;
+    pwing == -1){
+        float a = (atan2(mouseY - height/2, mouseX - width/2) + 4*PI)%(2*PI);  
+        if (a&gt;start &amp;&amp; a&lt;end){
+            fill(c1);
+            nearCenter = true;
+            wing = i;
+        }
+    } 
+    
+    if (pwing == i){
+        fill(c1);
+        
+        
+        
+        }
+    
+    translate(width/2, height/2); 
+    
+    rotate(rot*PI/180);
+    rotate(i*curve);
+    
+    translate(pop[i], 0);
+    
+    arc(0, 0, p+pop[i], p+pop[i], -curve/2, curve/2);
+  resetMatrix();
+
+}
+
+if (value == 0){
+for (int i = 0; i &lt; 5; i = i+1) {
+    int fp = ((20-pop[i])/20)*fpop; 
+    int ifp = ((pop[i])/20)*fpop; 
+    
+    if (wing != i){
+        if (pop[i]-ifp &lt; 0){
+        pop[i] = 0;
+        }else{
+            pop[i] -= ifp;
+        }
+    }else{
+        if (pop[i]+fp &gt; 20){
+        pop[i] = 20;
+        }else{
+            pop[i] += fp;
+        }
+    }
+}
+
+if (nearCenter){
+    if (rsp-frsp &lt; 0){
+        rsp = 0;
+    }else{
+        rsp -= frsp;
+    }
+}else{
+    if (rsp+arsp &gt; mrsp){
+        rsp = mrsp;
+    }else{
+        rsp += arsp;
+    }
+}
+
+
+    }else{
+        
+        //float g = ((rot*PI/180) + (pwing*curve))%(2*PI) ;
+        //rot = rots((rot*PI/180), PI/2, 0.005);
+        
+        for (int i = 0; i &lt; 5; i = i+1) {
+    int fp = ((50-pop[i])/50)*fpop; 
+    int ifp = ((3000-pop[i])/3000)*20; 
+    
+    if (pwing != i){
+        if (pop[i]+ ifp &gt; 3000){
+        pop[i] = 3000;
+        }else{
+            pop[i] += ifp;
+        }
+    }else{
+        if (pop[i]+fp &gt; 50){
+        pop[i] = 50;
+        }else{
+            pop[i] += fp;
+        }
+    }
+}
+
+        
+        
+        }
+    
+    
+}
+
+void mouseClicked() {
+    if (wing == pwing &amp;&amp; pwing!=-1){
+        pwing = -1;
+        }
+        
+    if (wing != -1){
+        value = 255;
+        c1 = #FFFFFF;
+        pwing = wing;
+    }
+    
+    
+}
+
+</pre><script src="//sketchpad.cc/static/js/processing-1.4.8.min.js"></script>
+<script src="//sketchpad.cc/static/js/init.js?1"></script>
+<link href="//sketchpad.cc/static/css/embed.css?1" rel="stylesheet" type="text/css" />
+</body>
+</html>
